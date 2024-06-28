@@ -6,9 +6,15 @@ describe("Counter Component Testing", () => {
   it("Counter change check!", () => {
     render(<Counter />);
 
-    const heading = screen.getByRole("heading", { name: "0" });
-    const increment = screen.getByRole("button", { name: "Increment" });
-    const decrement = screen.getByRole("button", { name: "Decrement" });
+    const heading = screen.getByRole("heading", {
+      name: "0",
+    }) as HTMLHeadingElement;
+    const increment = screen.getByRole("button", {
+      name: "Increment",
+    }) as HTMLButtonElement;
+    const decrement = screen.getByRole("button", {
+      name: "Decrement",
+    }) as HTMLButtonElement;
 
     fireEvent.click(increment);
 
