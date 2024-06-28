@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Counter component
 
-## Getting Started
+This project contains a simple Counter component built with NextJS. The component allows users to increment and decrement the calculated value displayed in the header.
 
-First, run the development server:
+## Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [Description](#description)
+- [Install](#install)
+- [Usage](#usage)
+- [Test](#test)
+- [License](#license)
+
+## Description
+
+The Counter component is a simple component in NextJS that manages the count state. It contains two buttons to increase and decrease the number and a header to display the current number. In this case, we will test the state of our component by writing a test to the component we have created
+
+## Installation
+
+To set up the project, follow these steps:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Rof1yev/xxx.git
+   cd xxx
+   ```
+
+2. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Preview
+
+### app/page.tsx
+
+```javascript
+import Counter from "./components/Counter";
+
+export default function Home() {
+  return <Counter />;
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### app/components/Counter.tsx
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```javascript
+"use client";
+import { useState } from "react";
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+export default function Counter() {
+  const [count, setCount] = useState < number > 0;
 
-## Learn More
+  const increment = () => setCount((prev: number) => prev + 1);
+  const decrement = () => setCount((prev: number) => prev - 1);
 
-To learn more about Next.js, take a look at the following resources:
+  return (
+    <div className="container p-10">
+      <h2 className="text-4xl mb-2">{count}</h2>
+      <div className="flex gap-2">
+        <button className="bg-blue-500 py-2 px-4 rounded" onClick={increment}>
+          Increment
+        </button>
+        <button className="bg-blue-500 py-2 px-4 rounded" onClick={decrement}>
+          Decrement
+        </button>
+      </div>
+    </div>
+  );
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Testing File
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### \_\_tests\_\_/counter.test.jsx
 
-## Deploy on Vercel
+```javascript
+import "@testing-library/jest-dom";
+import { render, screen, fireEvent } from "@testing-library/react";
+import Counter from "@/components/Counter";
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+describe("Counter Component Testing", () => {
+  it("Counter change check!", () => {
+    render(<Counter />);
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    const heading = screen.getByRole("heading", { name: "0" });
+    const increment = screen.getByRole("button", { name: "Increment" });
+    const decrement = screen.getByRole("button", { name: "Decrement" });
+
+    fireEvent.click(increment);
+
+    expect(heading).toBeInTheDocument();
+    expect(heading).toHaveTextContent("1");
+
+    fireEvent.click(decrement);
+    expect(heading).toHaveTextContent("0");
+  });
+});
+```
+
+## Run Test FIle
+
+To set up the project, follow these steps:
+
+1. You will need to open a terminal:
+
+   ```bash
+   Ctrl + Shift + `
+   ```
+
+2. You have to write:
+
+   ```bash
+   npm run test
+   ```
+
+> You will then be able to see the result of the component test!
+
+## Explanation
+
+1. **Description**: Provides a brief overview of the `Counter` page functionality.
+2. **Installation**: Steps to set up the project by cloning the repository, installing dependencies, and running the development server.
+3. **Usage**: Instructions on how to use the `Counter` component in a Next.js application.
+4. **Testing**: Details about the testing setup and how to run the tests.
+5. **License**: Information about the project's license.
+
+This `README.md` file should provide a comprehensive guide to understanding, setting up, and testing the `Counter` page in your Next.js project.
