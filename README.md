@@ -21,8 +21,8 @@ To set up the project, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Rof1yev/xxx.git
-   cd xxx
+   git clone https://github.com/Rofiyev/nextjs-testing.git
+   cd nextjs-testing
    ```
 
 2. Install the dependencies:
